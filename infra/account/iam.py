@@ -40,3 +40,22 @@ class IamPolicy:
     def arn(self):
         return self.policy.arn
 
+class IamUser:
+    def __init__(self, name: str):
+        self.user = aws.iam.User(
+            name,
+            tags={"Name": name}
+        )
+
+    @property
+    def id(self):
+        return self.user.id
+
+    @property
+    def name(self):
+        return self.user.name
+
+    @property
+    def arn(self):
+        return self.user.arn
+	

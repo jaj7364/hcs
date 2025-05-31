@@ -1,7 +1,7 @@
 import pulumi
 from network import Vpc, Subnet, SecurityGroup
 from s3 import S3Bucket
-from account import IamRole, IamPolicy
+from account import IamRole, IamPolicy, IamUser
 
 # VPC 생성
 vpc = Vpc(name="hcs-an2-vpc", cidr_block="10.212.0.0/16")
@@ -38,9 +38,9 @@ bucket_dev = S3Bucket("hcs-dev-an2-s3")
 bucket_stg = S3Bucket("hcs-stg-an2-s3")
 bucket_prod = S3Bucket("hcs-prod-an2-s3")
 
-#IAM Role&Policy 생성
+#IAM Role 생성
 role = IamRole(
-    name="hcs-an2-ec2-role",
+    name="hcs-an2-role-sts",
     assume_role_policy="""{
       "Version": "2012-10-17",
       "Statement": [
@@ -55,8 +55,9 @@ role = IamRole(
     }"""
 )
 
+#IAM Policy 생성
 policy = IamPolicy(
-    name="hcs-an2-bucket-policy",
+    name="hcs-an2-policy-s3",
     policy_json="""{
       "Version": "2012-10-17",
       "Statement": [
@@ -68,6 +69,9 @@ policy = IamPolicy(
       ]
     }"""
 )
+
+#IAM USER 생성
+user = IamUser("hcs-an2-user-cli")
 
 # 출력
 pulumi.export("vpc_id", vpc.id)
@@ -82,3 +86,4 @@ pulumi.export("bucket_stg", bucket_stg.id)
 pulumi.export("bucket_prod", bucket_prod.id)
 pulumi.export("role", role.id)
 pulumi.export("policy", policy.id)
+pulumi.export("user", user.name)
