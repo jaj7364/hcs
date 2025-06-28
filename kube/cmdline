@@ -9,3 +9,6 @@ kubectl scale deployment hello-world-rest-api --replicas=3
 #20250622
 ##디플로이먼트/서비스/레플리카/파드/컨테이너/마스터노드/워커노드/로드벨런서/ClusterIP/노드포트
 kubectl get events --sort-by=.metadata.creationTimestamp
+
+#20250629
+##docker images:ilwoo929/hello-world-rest-api:0.0.4-SNAPSHOT
