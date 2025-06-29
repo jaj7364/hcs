@@ -1,6 +1,6 @@
 from s3.s3 import S3Bucket
 
-def setup():
+def s3():
     s3_dev = S3Bucket("hcs-dev-an2-s3")
     s3_stg = S3Bucket("hcs-stg-an2-s3")
     s3_prod = S3Bucket("hcs-prod-an2-s3")

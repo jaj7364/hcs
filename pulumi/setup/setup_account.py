@@ -1,6 +1,6 @@
 from account.iam import IamRole, IamPolicy, IamUser
 
-def setup():
+def account():
     role = IamRole(
     name="hcs-an2-role-ec2",
     assume_role_policy="""{
